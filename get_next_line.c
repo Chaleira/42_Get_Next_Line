@@ -6,7 +6,7 @@
 /*   By: plopes-c <plopes-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 08:02:40 by plopes-c          #+#    #+#             */
-/*   Updated: 2022/11/23 18:06:14 by plopes-c         ###   ########.fr       */
+/*   Updated: 2022/11/24 19:01:59 by plopes-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,14 @@
 
 char	*get_next_line(int fd)
 {
-	char			*buffer;
-	static char		*saved;
-	static int		i;
-	int				n;
+	static char	buffer[BUFFER_SIZE + 1];
+	char		*save;
 
-	i = 0;
-	saved = malloc(ft_alsp(fd, 0));
-	while (saved[i] != '\n')
-	{
-		buffer = malloc(BUFFER_SIZE);
+	if (ft_checkbuff(buffer) == 0)
 		read(fd, buffer, BUFFER_SIZE);
-		n = 0;
-		while (buffer[i])
-		{
-			saved[i] = buffer[n];
-			i++;
-			n++;
-		}
-		free(buffer);
-	}
-	return (saved);
+	
+	
+	return (save);
 }
 
 int	main(void)

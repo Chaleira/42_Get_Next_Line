@@ -29,8 +29,8 @@ size_t	ft_alsp(int fd, char *str)
 
 char	*get_next_line(int fd)
 {
-	char			*buffer;
-	static char		*saved;
+	static char	buffer[BUFFER_SIZE + 1];
+	char		*saved;
 	static int		i;
 	int				n;
 

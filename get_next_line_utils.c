@@ -6,12 +6,12 @@
 /*   By: plopes-c <plopes-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 08:08:49 by plopes-c          #+#    #+#             */
-/*   Updated: 2022/11/23 18:05:37 by plopes-c         ###   ########.fr       */
+/*   Updated: 2022/11/24 18:59:43 by plopes-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-
+/*
 size_t	ft_alsp(int fd, size_t i)
 {
 	char	*str;
@@ -29,7 +29,6 @@ size_t	ft_alsp(int fd, size_t i)
 		return (i);
 }
 
-/*
 size_t	ft_strlen(const char *s)
 {
 	int	i;
@@ -63,7 +62,11 @@ char	*ft_strjoin(char *s1, char *s2)
 		i++;
 	}
 	if (s2[n] == '\n')
+	{
 		str[i] = '\n';
+		i++;
+	}
+	str[i] = '\0';
 	return (str);
 }
 
@@ -82,3 +85,37 @@ int	snl(char	*str)
 	return (0);
 }
 */
+
+size_t	ft_strlen(const char *s)
+{
+	int	i;
+
+	i = 0;
+	while (s[i])
+		i++;
+	return (i);
+}
+
+char	*ft_checkbuff(char *str)
+{
+	char	*newstr;
+	size_t	i;
+	size_t	len;
+	size_t	j;
+
+	j = 0;
+	i = 0;
+	len = ft_strlen(str);
+	while (str[i] && str[i] != '\n')
+		i++;
+	if (i == 0)
+		return (0);
+	if (i == len)
+		return (str);
+	while (j <= i)
+	{
+		newstr[j] = str[j];
+		j++;
+	}
+	return (newstr);
+}

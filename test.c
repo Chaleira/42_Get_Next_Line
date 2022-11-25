@@ -12,7 +12,7 @@
 
 size_t	ft_strlen(char *s);
 int		snl(char	*str);
-char	*ft_strjoin(size_t i, char *s2);
+char	*ft_strjoin(char *s1, char *s2);
 char	*get_next_line(int fd);
 
 int	snl(char	*str)
@@ -72,13 +72,13 @@ char	*get_next_line(int fd)
 	i = 0;
 	buffer = malloc(BUFFER_SIZE);
 	read(fd, buffer, BUFFER_SIZE);
-	saved = ft_strjoin(ft_strlen(saved), buffer);
+	saved = ft_strjoin(saved, buffer);
 	free (buffer);
 	while (saved[i] != '\n' && saved[i])
 	{
 		buffer = malloc(BUFFER_SIZE);
 		read(fd, buffer, BUFFER_SIZE);
-		saved = ft_strjoin(ft_strlen(saved), buffer);
+		saved = ft_strjoin(saved, buffer);
 		free (buffer);
 		i++;
 	}
