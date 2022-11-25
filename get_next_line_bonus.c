@@ -1,36 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: plopes-c <plopes-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/22 08:02:40 by plopes-c          #+#    #+#             */
-/*   Updated: 2022/11/25 14:43:04 by plopes-c         ###   ########.fr       */
+/*   Created: 2022/11/25 15:20:50 by plopes-c          #+#    #+#             */
+/*   Updated: 2022/11/25 15:24:54 by plopes-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 char	*get_next_line(int fd)
 {
-	static char	buffer[BUFFER_SIZE + 1];
+	static char	buffer[FOPEN_MAX][BUFFER_SIZE + 1];
 	char		*line;
 	int			i;
 
-	if (read(fd, 0, 0) < 0)
+	if (read(fd, 0, 0) < 0 || fd >= FOPEN_MAX)
 	{
 		i = 0;
-		while (i < BUFFER_SIZE)
-			buffer[i++] = 0;
+		if (fd > -1 && fd < FOPEN_MAX)
+			while (i < BUFFER_SIZE)
+				buffer[fd][i++] = 0;
 		return (NULL);
 	}
 	line = NULL;
-	if (!buffer[0])
-		buffer[read(fd, buffer, BUFFER_SIZE)] = 0;
-	while (!ft_checkbuff(buffer, &line))
-		buffer[read(fd, buffer, BUFFER_SIZE)] = 0;
-	ft_cleanbuff(buffer);
+	if (!buffer[fd][0])
+		buffer[fd][read(fd, buffer[fd], BUFFER_SIZE)] = 0;
+	while (!ft_checkbuff(buffer[fd], &line))
+		buffer[fd][read(fd, buffer[fd], BUFFER_SIZE)] = 0;
+	ft_cleanbuff(buffer[fd]);
 	return (line);
 }
 /*
