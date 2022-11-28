@@ -6,7 +6,7 @@
 /*   By: plopes-c <plopes-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 08:08:49 by plopes-c          #+#    #+#             */
-/*   Updated: 2022/11/25 14:42:16 by plopes-c         ###   ########.fr       */
+/*   Updated: 2022/11/28 18:00:17 by plopes-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ char	*ft_strjoin(char const *str, char *line)
 	i = 0;
 	n = 0;
 	newstr = malloc((ft_strlen(str)) + (ft_strlen(line)) + 1);
-	if (str == NULL)
+	if (!newstr)
 		return (NULL);
 	while (line && line[i] != '\0')
 	{
